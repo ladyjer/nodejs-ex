@@ -2,7 +2,9 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
-    
+
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
+
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
@@ -111,6 +113,13 @@ app.get('/pagecount', function (req, res) {
 
 app.get('/ricevi', function(req, res) {
     res.send('Ok listening');
+});
+
+app.post('/ricevi', function(req, res) {
+     const twiml = new MessagingResponse();
+     twiml.message('The Robots are coming! Head for the hills!');
+     res.writeHead(200, {'Content-Type': 'text/xml'});
+     res.end(twiml.toString());
 });
 // error handling
 app.use(function(err, req, res, next){
