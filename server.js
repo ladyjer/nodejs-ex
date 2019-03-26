@@ -109,6 +109,9 @@ app.get('/pagecount', function (req, res) {
   }
 });
 
+app.get('/ricevi', function(req, res) {
+    res.send('Ok listening');
+});
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
